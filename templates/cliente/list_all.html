@@ -5,18 +5,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Polilla en el Bosque de las Finanzas</title>
 </head>
-<body>
-    <h1> Lista de clientes de polilla</h1>
-    <ul>
+<body class="bg-gray-50 font-serif leading-normal tracking-normal">
+    <h1 class="border-2 border-red-100"> Lista de clientes de polilla</h1>
+
+    <table >
+        <tr>
+            <td>Identificador</td>
+            <td>Rut</td>
+            <td>Nombres</td>
+            <td>apellidos</td>
+            <td>fecha nacimiento</td>
+            <td>telefono</td>
+            <td>fecha creacion</td>
+        </tr>
         {% for client in clients %}
-        <li>{{client.id}} </li>
-        <li>{{client.rut}} </li>
-        <li>{{client.nombres}} </li>
-        <li>{{client.apellidos}} </li>
-        <li>{{client.fecha_nacimiento}} </li>
-        <li>{{client.telefono}} </li>
-        <li>{{client.date_created}} </li>
+        <tr>
+            <td>{{client.id}} </td>
+            <td>{{client.rut}} </td>
+            <td>{{client.nombres}} </td>
+            <td>{{client.apellidos}} </td>
+            <td>{{client.fecha_nacimiento}} </td>
+            <td>{{client.telefono}} </td>
+            <td>{{client.date_created}} </td>
+        </tr>
         {% endfor %}
-    </ul>
+       
+    </table>
+
 </body>
 </html>

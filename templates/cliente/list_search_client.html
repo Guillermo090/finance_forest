@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Polilla en el Bosque de las Finanzas</title>
+</head>
+<body>
+    <h1> Lista de clientes filtrada por nombre</h1>
+
+    <form method="GET">
+        {% csrf_token %}
+        <input type="text" id="name" name="name" placeholder="nombre a buscar">
+        <button type="submit">Buscar</button>
+    </form>
+
+    {% for client in clients %}
+    <table>
+        <td>
+            <tr>{{client.id}} </tr>
+            <tr>{{client.rut}} </tr>
+            <tr>{{client.nombres}} </tr>
+            <tr>{{client.apellidos}} </tr>
+            <tr>{{client.fecha_nacimiento}} </tr>
+            <tr>{{client.telefono}} </tr>
+            <tr>{{client.date_created}} </tr>
+        </td>
+    </table>
+    {% endfor %}
+</body>
+</html>
