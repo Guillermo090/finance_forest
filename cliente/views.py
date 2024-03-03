@@ -27,3 +27,11 @@ class ClientSearchListView(generic.ListView):
         name_to_filter = self.request.GET.get('name','')
         queryset = ClCliente.objects.filter(nombres__contains=name_to_filter)
         return queryset
+    
+
+
+class CreateClientCreateView(generic.CreateView):
+    template_name = 'cliente/create_client.html'
+    model = ClCliente
+    fields = ('__all__')
+    success_url = '.'

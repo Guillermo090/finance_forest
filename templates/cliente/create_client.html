@@ -1,0 +1,24 @@
+{% load static tailwind_tags %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Crea cliente </title>
+    {% tailwind_css %}
+</head>
+<body>
+    <div class="w-screen text-center my-8">
+        <h1 class="text-4xl my-8"> Crea cliente</h1>
+
+        <form method="POST" class="flex flex-col justify-items-start">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit"> Agregar </button>
+        </form>
+
+  
+    </div>
+    
+</body>
+</html>
