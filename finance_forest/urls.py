@@ -21,4 +21,5 @@ from balance.views import IndexView
 urlpatterns = [
     path('admin/', admin.site.urls),
     re_path('', include('cliente.urls')),
+    path("__reload__/", include("django_browser_reload.urls")),
 ]

@@ -1,14 +1,16 @@
+{% load static tailwind_tags %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% tailwind_css %}
     <title>Polilla en el Bosque de las Finanzas</title>
 </head>
 <body class="bg-gray-50 font-serif leading-normal tracking-normal">
-    <h1 class="border-2 border-red-100"> Lista de clientes de polilla</h1>
+    <h1 class="border-2 border-red-100 text-5xl"> Lista de clientes de polilla</h1>
 
-    <table >
+    <table   >
         <tr>
             <td>Identificador</td>
             <td>Rut</td>

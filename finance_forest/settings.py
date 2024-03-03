@@ -25,7 +25,11 @@ SECRET_KEY = 'django-insecure-im*_c20_zrq#q(7iis-pgdd05m%3k4fm!p)#ntb4)=@d&1$5si
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
+
+INTERNAL_IPS = [
+    "127.0.0.1",
+]
 
 
 # Application definition
@@ -37,6 +41,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'tailwind',
+    'theme',
+    'django_browser_reload',
     'balance',
     'cliente'
 ]
@@ -49,6 +56,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django_browser_reload.middleware.BrowserReloadMiddleware',
 ]
 
 ROOT_URLCONF = 'finance_forest.urls'
@@ -105,7 +113,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'es-Santiago'
 
 TIME_ZONE = 'UTC'
 
@@ -123,3 +131,7 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+TAILWIND_APP_NAME = 'theme'
+NPM_BIN_PATH = 'C:/Program Files/nodejs/npm.cmd'

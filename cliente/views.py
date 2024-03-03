@@ -21,6 +21,7 @@ class ClientSearchListView(generic.ListView):
     template_name = 'cliente/list_search_client.html'
     context_object_name = 'clients'
     queryset = ClCliente.objects.filter(fecha_nacimiento__gte='2006-03-03')
+    paginate_by = 10
 
     def get_queryset(self) -> QuerySet[Any]:
         name_to_filter = self.request.GET.get('name','')

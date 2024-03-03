@@ -1,31 +1,52 @@
+{% load static tailwind_tags %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Polilla en el Bosque de las Finanzas</title>
+    {% tailwind_css %}
 </head>
 <body>
-    <h1> Lista de clientes filtrada por nombre</h1>
+    <div class="w-screen text-center my-8">
+        <h1 class="text-4xl my-8"> Lista de clientes filtrada por nombre</h1>
+        <form method="GET" class="flex justify-center  space-x-8 items-center">
+            {% csrf_token %}
+            <input class=" rounded-md border-2 border-blue-200 hover:border-blue-300 text-center" type="text" id="name" name="name" placeholder="Ingrese nombre a buscar">
+            <button class=" w-28 h-8 rounded-sm border-2 border-gray-500" type="submit">Buscar</button>
+        </form>
 
-    <form method="GET">
-        {% csrf_token %}
-        <input type="text" id="name" name="name" placeholder="nombre a buscar">
-        <button type="submit">Buscar</button>
-    </form>
+        <table class="w-screen divide-y divide-gray-200 mt-12"  >
+            <thead>
+                <tr>
+                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" >Identificador</th>
+                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" >Rut</th>
+                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" >Nombres</th>
+                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" >apellidos</th>
+                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" >fecha nacimiento</th>
+                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" >telefono</th>
+                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" >fecha creacion</th>
+                </tr>
+            </thead>
+            <tbody class="bg-white divide-y divide-gray-200">
+                {% for client in clients %}
+                <tr>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900" >{{client.id}} </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900" >{{client.rut}} </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900" >{{client.nombres}} </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900" >{{client.apellidos}} </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900" >{{client.fecha_nacimiento}} </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900" >{{client.telefono}} </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900" >{{client.date_created}} </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+           
+        </table>
 
-    {% for client in clients %}
-    <table>
-        <td>
-            <tr>{{client.id}} </tr>
-            <tr>{{client.rut}} </tr>
-            <tr>{{client.nombres}} </tr>
-            <tr>{{client.apellidos}} </tr>
-            <tr>{{client.fecha_nacimiento}} </tr>
-            <tr>{{client.telefono}} </tr>
-            <tr>{{client.date_created}} </tr>
-        </td>
-    </table>
-    {% endfor %}
+    </div>
+
+
+    
 </body>
 </html>
