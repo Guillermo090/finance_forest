@@ -1,0 +1,51 @@
+
+{% load static tailwind_tags %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Polilla en el Bosque de las Finanzas</title>
+    {% tailwind_css %}
+</head>
+<body class="bg-gray-50 font-serif leading-normal tracking-normal">
+    <div class="w-screen text-center my-8">
+        <h1 class="text-4xl my-8"> Lista de pagos filtrada por nombre</h1>
+        <form method="GET" class="flex justify-center  space-x-8 items-center">
+            {% csrf_token %}
+            <input class=" rounded-md border-2 border-blue-200 hover:border-blue-300 text-center" type="text" id="name" name="name" placeholder="Ingrese nombre a buscar">
+            <button class=" w-28 h-8 rounded-sm border-2 border-gray-500" type="submit">Buscar</button>
+        </form>
+
+    <table class="w-screen divide-y divide-gray-200 mt-12"  >
+        <thead>
+            <tr>
+                <td>ID</td>
+                <td>Fecha registro</td>
+                <td>Adeudado</td>
+                <td>Acreedor</td>
+                <td>Detalle de pago</td>
+                <td>¿ Pagado ?</td>
+            </tr>
+        </thead>
+        <tbody class="bg-white divide-y divide-gray-200">
+            {% for pago in pagos %}
+            <tr>
+                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{pago.id}} </td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{pago.date_created | date:"d-m-Y" }} </td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{pago.deudor.nombres }} {{pago.deudor.apellidos }} </td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{pago.acreedor.nombres }} {{pago.acreedor.apellidos }}</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{pago.detalle_pago}} </td>
+                {% if pago.pago_realizado %}
+                    <td>Pago Efectuado </td>
+                {% else  %}
+                    <td>Pago Efectuado </td>
+                {% endif %}
+            </tr>
+            {% endfor %}
+        </tbody>
+       
+    </table>
+
+</body>
+</html>

@@ -16,10 +16,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, re_path, include
-from balance.views import IndexView
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     re_path('', include('cliente.urls')),
+    re_path('', include('balance.urls')),
     path("__reload__/", include("django_browser_reload.urls")),
 ]
