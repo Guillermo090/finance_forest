@@ -1,0 +1,22 @@
+<!-- miapp/templates/miapp/mi_template.html -->
+<form method="post">
+    {% csrf_token %}
+    <div>
+        {{form.fecha_pago}}
+    </div>
+    <div>
+        {{form.detalle_pago}}
+    </div>
+    <div>
+        {{form.acreedor}}
+    </div>
+    <div>
+        {{form.deudor}}
+    </div>
+    <div>
+        {{form.pago_realizado}}
+    </div>
+    
+    <!-- {{ form.as_p }} -->
+    <button type="submit">Enviar</button>
+</form>
