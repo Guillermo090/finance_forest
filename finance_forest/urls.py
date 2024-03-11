@@ -20,7 +20,7 @@ from django.urls import path, re_path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    re_path('', include('cliente.urls')),
-    re_path('', include('balance.urls')),
+    re_path('', include('cliente.urls','cliente')),
+    re_path('', include('balance.urls','balance')),
     path("__reload__/", include("django_browser_reload.urls")),
 ]

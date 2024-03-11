@@ -3,6 +3,7 @@ from django.urls import path
 
 from balance.views import PagosListView, PagosFormView
 
+app_name = 'balance'
 
 urlpatterns = [
     path('list_all_payments/',PagosListView.as_view()),
