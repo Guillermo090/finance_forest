@@ -13,3 +13,6 @@ class ClCliente(models.Model):
         db_table = 'cl_cliente' 
         verbose_name = 'Cliente'
         verbose_name_plural = 'Clientes'
+
+    def __str__(self) -> str:
+        return f'{self.nombres} {self.apellidos}'

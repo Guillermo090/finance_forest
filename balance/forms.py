@@ -22,3 +22,14 @@ class PagosForm(forms.Form):
 
     def label_from_instance_custom(self, obj):
         return f'{obj.nombres}'
+    
+
+class PagosModelForm(forms.ModelForm):
+
+    class Meta:
+        model = BaRegistroPago
+        fields = ['fecha_pago', 
+                  'deudor', 
+                  'detalle_pago', 
+                  'acreedor', 
+                  'pago_realizado']

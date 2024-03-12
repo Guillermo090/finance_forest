@@ -1,0 +1,99 @@
+{% load static tailwind_tags %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Polilla en el Bosque de las Finanzas</title>
+    {% tailwind_css %}
+</head>
+<body>
+    <div class="w-screen text-center my-8">
+        <h1 class="text-4xl my-8"> Lista de balances filtrada por nombre</h1>
+        <form method="GET" class="flex flex-col  space-y-8 ">
+            {% csrf_token %}
+            <div class="flex space-x-8 justify-center items-center  ">
+                <label for="deudor"> Deudor</label>
+                <input class=" rounded-md border-2 border-blue-200 hover:border-blue-300 text-center" type="text" id="deudor" name="deudor" placeholder="deudor" value="{{deudor}}">
+                <label for="acreedor"> Acreedor</label>
+                <input class=" rounded-md border-2 border-blue-200 hover:border-blue-300 text-center" type="text" id="acreedor" name="acreedor" placeholder="acreedor" value="{{acreedor}}">
+                <label for="date_from"> Desde</label>
+                <input class=" rounded-md border-2 border-blue-200 hover:border-blue-300 text-center" type="date" id="date_from" name="date_from" placeholder="Desde" value="{{date_from}}">
+                <label for="date_to"> Hasta</label>
+                <input class=" rounded-md border-2 border-blue-200 hover:border-blue-300 text-center" type="date" id="date_to" name="date_to" placeholder="Hasta" value="{{date_to}}">
+                <label for="is_pay"> ¿Pagado?</label>
+                <select class=" rounded-md border-2 border-blue-200 hover:border-blue-300 text-center" id="is_pay" name="is_pay"  >
+                    <option value="all">Todo</option>
+                    <option value="True">SI</option>
+                    <option value="False">NO</option>
+                </select >
+
+                <input class=" rounded-md border-2 border-blue-200 hover:border-blue-300 text-center" type="checkbox" id="pagado" name="pagado" value="True">
+                <button class=" w-28 h-8 rounded-sm border-2 border-gray-500" type="submit">Buscar</button>
+            </div>
+        </form>
+
+        <table class="w-screen divide-y divide-gray-200 mt-12"  >
+            <thead>
+                <tr>
+                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" >Identificador</th>
+                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" >fecha creacion</th>
+                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" >fecha pago</th>
+                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" >deudor</th>
+                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" >acreedor</th>
+                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" >detalle_pago</th>
+                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" >pago_realizado</th>
+                </tr>
+            </thead>
+            <tbody class="bg-white divide-y divide-gray-200">
+                {% for payment in payments %}
+                <tr>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900" >{{payment.id}} </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900" >{{payment.date_created}} </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900" >{{payment.fecha_pago}} </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900" >{{payment.deudor.nombres}} {{payment.deudor.apellidos}} </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900" >{{payment.acreedor.nombres}} {{payment.acreedor.apellidos}} </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900" >{{payment.detalle_pago}} </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900" >
+                        {% if payment.pago_realizado %}
+                            SI
+                        {% else %}
+                            No
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+           
+        </table>
+
+    </div>
+
+    <div class="flex justify-center items-center my-4">
+        <div class="flex">
+            {% if is_paginated %}
+            <ul class="flex list-reset border border-grey-light rounded ">
+                {% if page_obj.has_previous %}
+                <li>
+                    <a href="?page={{ page_obj.previous_page_number }}{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}" class="block py-2 px-3 leading-tight bg-white border-r border-grey-light text-blue-700 hover:bg-grey-lighter">
+                        Anterior
+                    </a>
+                </li>
+                {% endif %}
+                <!-- Aquí puedes insertar enlaces a páginas específicas si lo deseas -->
+                {% if page_obj.has_next %}
+                <li>
+                    <a href="?page={{ page_obj.next_page_number }}{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}" class="block py-2 px-3 leading-tight bg-white border-r border-grey-light text-blue-700 hover:bg-grey-lighter">
+                        Siguiente
+                    </a>
+                </li>
+                {% endif %}
+            </ul>
+            {% endif %}
+        </div>
+    </div>
+
+
+    
+</body>
+</html>

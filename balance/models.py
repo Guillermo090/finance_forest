@@ -17,6 +17,9 @@ class BaRegistroPago(models.Model):
         db_table = 'ba_registro_pago' 
         verbose_name = 'Registro de Pago'
         verbose_name_plural = 'Registros de Pagos'
+    
+    def __str__(self) -> str:
+        return f'{self.id}'
 
 
 class BaCtaInterna(models.Model):
