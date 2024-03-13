@@ -1,13 +1,13 @@
-{% load static tailwind_tags %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Crea cliente </title>
-    {% tailwind_css %}
-</head>
-<body>
+{% extends "base/base.html" %}
+
+{% block title %}Página Principal{% endblock %}
+
+{% block navbar %}
+    {% include "base/navbar.html" %}
+{% endblock %}
+
+{% block content %}
+    <h1>¡Bienvenido a mi sitio web!</h1>
     <div class="w-screen text-center my-8">
         <h1 class="text-4xl my-8"> Crea cliente</h1>
 
@@ -19,6 +19,8 @@
 
   
     </div>
+{% endblock %}
+ 
+  
     
-</body>
-</html>
+ 

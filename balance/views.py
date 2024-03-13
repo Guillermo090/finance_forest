@@ -34,7 +34,7 @@ class PaymentSearchListView(generic.ListView):
     template_name = 'balance/list_search_payment.html'
     context_object_name = 'payments'
     queryset = BaRegistroPago.objects.all()
-    paginate_by = 4
+    paginate_by = 10
 
     def get_queryset(self) -> QuerySet[Any]:
         acreedor_to_filter = self.request.GET.get('acreedor','')

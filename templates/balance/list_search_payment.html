@@ -1,16 +1,16 @@
-{% load static tailwind_tags %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Polilla en el Bosque de las Finanzas</title>
-    {% tailwind_css %}
-</head>
-<body>
-    <div class="w-screen text-center my-8">
-        <h1 class="text-4xl my-8"> Lista de balances filtrada por nombre</h1>
-        <form method="GET" class="flex flex-col  space-y-8 ">
+{% extends "base/base.html" %}
+
+{% block title %} Listar Balances {% endblock %}
+
+{% block navbar %}
+    {% include "base/navbar.html" %}
+{% endblock %}
+
+{% block content %}
+ 
+    <div class="w-screen text-center py-6 border-t border-blue-400" >
+        <h1 class="text-4xl mb-4 "> Balances </h1>
+        <form method="GET" class="flex flex-col  ">
             {% csrf_token %}
             <div class="flex space-x-8 justify-center items-center  ">
                 <label for="deudor"> Deudor</label>
@@ -32,6 +32,30 @@
                 <button class=" w-28 h-8 rounded-sm border-2 border-gray-500" type="submit">Buscar</button>
             </div>
         </form>
+
+        <div class="flex justify-center items-center my-4">
+            <div class="flex">
+                {% if is_paginated %}
+                <ul class="flex list-reset border border-grey-light rounded ">
+                    {% if page_obj.has_previous %}
+                    <li>
+                        <a href="?page={{ page_obj.previous_page_number }}{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}" class="block py-2 px-3 leading-tight bg-white border-r border-grey-light text-blue-700 hover:bg-grey-lighter">
+                            Anterior
+                        </a>
+                    </li>
+                    {% endif %}
+                    <!-- Aquí puedes insertar enlaces a páginas específicas si lo deseas -->
+                    {% if page_obj.has_next %}
+                    <li>
+                        <a href="?page={{ page_obj.next_page_number }}{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}" class="block py-2 px-3 leading-tight bg-white border-r border-grey-light text-blue-700 hover:bg-grey-lighter">
+                            Siguiente
+                        </a>
+                    </li>
+                    {% endif %}
+                </ul>
+                {% endif %}
+            </div>
+        </div>
 
         <table class="w-screen divide-y divide-gray-200 mt-12"  >
             <thead>
@@ -69,31 +93,8 @@
 
     </div>
 
-    <div class="flex justify-center items-center my-4">
-        <div class="flex">
-            {% if is_paginated %}
-            <ul class="flex list-reset border border-grey-light rounded ">
-                {% if page_obj.has_previous %}
-                <li>
-                    <a href="?page={{ page_obj.previous_page_number }}{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}" class="block py-2 px-3 leading-tight bg-white border-r border-grey-light text-blue-700 hover:bg-grey-lighter">
-                        Anterior
-                    </a>
-                </li>
-                {% endif %}
-                <!-- Aquí puedes insertar enlaces a páginas específicas si lo deseas -->
-                {% if page_obj.has_next %}
-                <li>
-                    <a href="?page={{ page_obj.next_page_number }}{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}" class="block py-2 px-3 leading-tight bg-white border-r border-grey-light text-blue-700 hover:bg-grey-lighter">
-                        Siguiente
-                    </a>
-                </li>
-                {% endif %}
-            </ul>
-            {% endif %}
-        </div>
-    </div>
 
 
-    
-</body>
-</html>
+
+ 
+{% endblock %}
