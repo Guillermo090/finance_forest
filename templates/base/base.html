@@ -1,0 +1,28 @@
+{% load static tailwind_tags %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %} Hola {% endblock %}</title>
+    {% tailwind_css %}
+    {% block extra_head %}{% endblock %}
+
+</head>
+<body>
+    <header>
+        {% block navbar %}{% endblock %}
+    </header>
+
+    <div class="container flex">
+        <main>
+            {% block content %}{% endblock %}
+        </main>
+    </div>
+
+    <footer>
+        <!-- Contenido del footer aquí -->
+    </footer>
+
+    {% block extra_js %}{% endblock %}
+</body>
+</html>
